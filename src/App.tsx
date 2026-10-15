@@ -4,6 +4,7 @@ import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Work from "./components/Work";
+import { waveBackgroundDots } from "./waveDots";
 import "./App.css";
 
 type Theme = "light" | "dark";
@@ -40,9 +41,11 @@ function App() {
 
       <Header
         theme={theme}
-        onToggleTheme={() =>
-          setTheme((current) => (current === "light" ? "dark" : "light"))
-        }
+        onToggleTheme={() => {
+          const next = theme === "light" ? "dark" : "light";
+          waveBackgroundDots(theme, next);
+          setTheme(next);
+        }}
       />
 
       <main id="main">

@@ -339,7 +339,6 @@ function Work() {
                     <p className="project__kind">{project.kind}</p>
                     <h3>{project.title}</h3>
                   </div>
-                  <span className="project__index">0{index + 1}</span>
                 </div>
                 <p className="project__description">{project.description}</p>
                 <ul className="tag-list" aria-label="Technologies">
