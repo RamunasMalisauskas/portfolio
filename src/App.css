@@ -894,6 +894,7 @@ a:hover {
 .about-section {
   display: flex;
   justify-content: center;
+  padding: 24px;
   color: #efefe8;
   background: #273029;
 }
@@ -1138,6 +1139,7 @@ a:hover {
     font-size: 28px;
   }
   .about-section__inner {
+    padding: 24px;
     grid-template-columns: 0.6fr 1.4fr;
     gap: 36px;
   }
@@ -1275,6 +1277,7 @@ a:hover {
     right: 10%;
   }
   .about-section__inner {
+    padding: 24px;
     grid-template-columns: 1fr;
     gap: 39px;
   }

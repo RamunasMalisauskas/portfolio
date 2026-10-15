@@ -19,9 +19,6 @@ function Contact() {
       id="contact"
       aria-labelledby="contact-title"
     >
-      <span className="contact-section__spark" aria-hidden="true">
-        ✳
-      </span>
       <div className="contact-section__body">
         <h2 id="contact-title">
           Something good
@@ -49,9 +46,10 @@ function Contact() {
         </div>
       </div>
       <footer className="site-footer">
-        <p>
-          <span aria-hidden="true">✳</span> Made with care in Lithuania
+        <p className="eyebrow hero__eyebrow">
+          <span className="status-dot" /> Made with care in Lithuania
         </p>
+
         <a className="back-top" href="#top">
           BACK TO TOP ↑
         </a>
