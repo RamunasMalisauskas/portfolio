@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Mindletic App",
+    "kind": "Mobile app",
+    "description": "Replace with the problem you solved, what you built, and the result.",
+    "stack": ["React Native", "Tailwind CSS", "Typescript"],
+    "liveUrl": "https://play.google.com/store/apps/details?id=com.digitalaz.actoncrisis&hl=en",
+    "sourceUrl": "",
+    "placeholder": false,
+    "visual": "shop",
+    "mobile": true
+  },
+  {
+    "title": "Mindletic Dashboard",
+    "kind": "Website dashboard",
+    "description": "A short, specific explanation helps someone understand your work at a glance.",
+    "stack": ["React", "JavaScript", "CSS"],
+    "liveUrl": "https://partners.mindletic.com/dashboard",
+    "sourceUrl": "",
+    "placeholder": false,
+    "visual": "signal"
+  },
+  {
+    "title": "sveikostuburomokykla.lt",
+    "kind": "Website",
+    "description": "Swap this card for a real build and add links to the demo and source code.",
+    "stack": ["User Experience", "Responsive UI", "Accessibility"],
+    "liveUrl": "https://sveikostuburomokykla.lt",
+    "sourceUrl": "",
+    "placeholder": false,
+    "visual": "mobile"
+  }
+]
