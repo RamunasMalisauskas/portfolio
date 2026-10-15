@@ -23,6 +23,7 @@ function getInitialTheme(): Theme {
 
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const nextTheme = theme === "light" ? "dark" : "light";
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -33,6 +34,14 @@ function App() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    const openingTheme = theme;
+    const timeout = window.setTimeout(() => {
+      waveBackgroundDots(openingTheme, openingTheme);
+    }, 1800);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -42,9 +51,8 @@ function App() {
       <Header
         theme={theme}
         onToggleTheme={() => {
-          const next = theme === "light" ? "dark" : "light";
-          waveBackgroundDots(theme, next);
-          setTheme(next);
+          waveBackgroundDots(theme, nextTheme);
+          setTheme(nextTheme);
         }}
       />
 
