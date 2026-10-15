@@ -7,7 +7,7 @@ function About() {
       id="about"
       aria-labelledby="about-title"
     >
-      <div className="about-section__inner wrap">
+      <div className="about-section__inner">
         <div className="about-section__content">
           <h2 id="about-title">
             The details make the difference

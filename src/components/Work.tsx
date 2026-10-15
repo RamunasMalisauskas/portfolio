@@ -19,14 +19,14 @@ const projects: Project[] = projectData;
 
 const mindleticAppImages = [
   "mindletic_home.PNG",
-  "mindletic_emotion.PNG",
+  "mindletic_pleasant.PNG",
   "mindletic_balance.PNG",
   "mindletic_breathing.PNG",
+  "mindletic_emotion.PNG",
   "mindletic_dark.PNG",
   "mindletic_energy.PNG",
   "mindletic_health.PNG",
   "mindletic_paths.PNG",
-  "mindletic_pleasant.PNG",
   "mindletic_profesionals.PNG",
   "mindletic_selection.PNG",
   "mindletic_sound.PNG",
@@ -223,7 +223,7 @@ function ProjectCarousel({
         <div className="project-modal__header">
           <p>{title}</p>
           <button type="button" onClick={onClose}>
-            Close
+            X
           </button>
         </div>
         <div
