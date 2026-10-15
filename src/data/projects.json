@@ -2,8 +2,8 @@
   {
     "title": "Mindletic App",
     "kind": "Mobile app",
-    "description": "Replace with the problem you solved, what you built, and the result.",
-    "stack": ["React Native", "Tailwind CSS", "Typescript"],
+    "description": "Created and implemented design system for mobile app that allows users to track their mental health and well-being.",
+    "stack": ["React Native", "Typescript", "Tailwind CSS", "Design System"],
     "liveUrl": "https://play.google.com/store/apps/details?id=com.digitalaz.actoncrisis&hl=en",
     "sourceUrl": "",
     "placeholder": false,
@@ -13,8 +13,8 @@
   {
     "title": "Mindletic Dashboard",
     "kind": "Website dashboard",
-    "description": "A short, specific explanation helps someone understand your work at a glance.",
-    "stack": ["React", "JavaScript", "CSS"],
+    "description": "Updated and improved the design and functionality of the dashboard to enhance the user experience and improve the overall performance of the app.",
+    "stack": ["React", "JavaScript", "Tailwind CSS", "Data Visualization"],
     "liveUrl": "https://partners.mindletic.com/dashboard",
     "sourceUrl": "",
     "placeholder": false,
@@ -23,8 +23,8 @@
   {
     "title": "sveikostuburomokykla.lt",
     "kind": "Website",
-    "description": "Swap this card for a real build and add links to the demo and source code.",
-    "stack": ["User Experience", "Responsive UI", "Accessibility"],
+    "description": "New branding was added to the website focusing on user journey and improving the overall user experience.",
+    "stack": ["Web Design", "User Experience", "Responsive UI", "Branding"],
     "liveUrl": "https://sveikostuburomokykla.lt",
     "sourceUrl": "",
     "placeholder": false,
