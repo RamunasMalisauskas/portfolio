@@ -21,9 +21,7 @@ function Contact() {
     >
       <div className="contact-section__body">
         <h2 id="contact-title">
-          Something good
-          <br />
-          starts with{" "}
+          Something good starts with{" "}
           <span className="highlight-word">
             hello<span className="highlight-word__dot">.</span>
           </span>
