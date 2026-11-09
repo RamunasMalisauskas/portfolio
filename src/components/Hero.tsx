@@ -11,20 +11,16 @@ function Hero() {
           <span className="eyebrow__divider">≡</span>
           <span>FRONT-END DEVELOPER / DESIGNER</span>
         </p>
-        <h1 id="hero-title">
-          I make your app
-          <br />
-          feel{" "}
+        <h1 id="hero__title">
+          I make your app feel{" "}
           <span className="highlight-word">
             thoughtful<span className="highlight-word__dot">.</span>
           </span>
         </h1>
         <p className="hero__intro">
-          I design and build clear, considered interfaces
-          <br />
-          with attention to detail, clarity, and the small decisions
-          <br />
-          that make an experience feel just right.
+          I design and build clear, considered interfaces with attention to
+          detail, clarity, and the small decisions that make an experience feel
+          just right.
         </p>
         <div className="hero__actions">
           <a className="button button--primary" href="#work">

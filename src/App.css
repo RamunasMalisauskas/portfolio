@@ -148,8 +148,9 @@ a:hover {
 }
 .hero h1 {
   margin-top: 31px;
+  max-width: 6.5em;
   font-size: clamp(56px, 6.5vw, 86px);
-  line-height: 0.99;
+  line-height: 1.12;
 }
 
 .highlight-word {
@@ -163,7 +164,7 @@ a:hover {
   color: var(--accent);
 }
 .hero__intro {
-  max-width: 445px;
+  max-width: 400px;
   margin: 26px 0 0;
   color: var(--muted);
   font-size: 15px;
@@ -367,7 +368,7 @@ a:hover {
 .section-heading h2 {
   margin-top: 17px;
   font-size: clamp(42px, 5.3vw, 62px);
-  line-height: 1.08;
+  line-height: 1.12;
 }
 .section-heading__aside {
   margin: 0 0 6px;
@@ -1015,8 +1016,9 @@ a:hover {
   padding: 48px 0 74px;
 }
 .contact-section h2 {
+  max-width: 6.5em;
   font-size: clamp(53px, 7vw, 86px);
-  line-height: 0.99;
+  line-height: 1.12;
 }
 .contact-section h2 .highlight-word__dot {
   color: var(--accent);
@@ -1024,9 +1026,19 @@ a:hover {
 :root[data-theme="dark"] .contact-section h2 .highlight-word__dot {
   color: var(--accent);
 }
+.contact-section__title {
+  width: fit-content;
+  max-width: 100%;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: var(--page);
+}
 .contact-section__aside {
   max-width: 330px;
   padding-bottom: 6px;
+  background-color: var(--page);
+  padding: 12px;
+  border-radius: 12px;
 }
 .contact-section__aside > p:first-child {
   margin: 0;
@@ -1308,6 +1320,15 @@ a:hover {
   }
   .contact-section__aside {
     max-width: 420px;
+  }
+  .contact-section__aside > p:first-child {
+    font-size: 13px;
+  }
+  .contact-section__setup {
+    font-size: 12px;
+  }
+  .contact-section__setup span {
+    font-size: 8px;
   }
   .site-footer {
     min-height: 68px;

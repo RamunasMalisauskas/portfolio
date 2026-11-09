@@ -20,12 +20,14 @@ function Contact() {
       aria-labelledby="contact-title"
     >
       <div className="contact-section__body">
-        <h2 id="contact-title">
-          Something good starts with{" "}
-          <span className="highlight-word">
-            hello<span className="highlight-word__dot">.</span>
-          </span>
-        </h2>
+        <div className="contact-section__title">
+          <h2 id="contact-title">
+            Something good starts with{" "}
+            <span className="highlight-word">
+              hello<span className="highlight-word__dot">.</span>
+            </span>
+          </h2>
+        </div>
         <div className="contact-section__aside">
           <p>
             Have an idea, a question, or a frontend challenge? I’d be glad to
