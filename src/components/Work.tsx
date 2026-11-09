@@ -49,6 +49,12 @@ const schoolImages = [
   "ssm_product2.png",
   "ssm_team.png",
 ];
+const rBoardGameImages = [
+  "rboard_home.png",
+  "rboard_light.png",
+  "rboard_add.png",
+  "rboard_game.png",
+];
 
 function imageSrc(file: string) {
   return `${import.meta.env.BASE_URL}${file}`;
@@ -63,6 +69,7 @@ function imagesFor(title: string) {
   if (name.includes("dashboard")) return mindleticDashboardImages;
   if (name.includes("mindletic")) return mindleticAppImages;
   if (name.includes("sveiko") || name.includes("mokykla")) return schoolImages;
+  if (name.includes("board")) return rBoardGameImages;
   return [];
 }
 
