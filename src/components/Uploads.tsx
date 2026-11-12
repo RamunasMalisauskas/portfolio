@@ -334,10 +334,15 @@ function Uploads() {
                 <h3>{project.title}</h3>
               </div>
               <div className="uploads-card__actions">
-                <button type="button" onClick={() => openEdit(index)}>
+                <button
+                  className="button button--primary"
+                  type="button"
+                  onClick={() => openEdit(index)}
+                >
                   Edit
                 </button>
                 <button
+                  className="button button--primary"
                   type="button"
                   onClick={() => void removeProject(index)}
                   disabled={offline}
@@ -468,6 +473,7 @@ function Uploads() {
                       </div>
                       <div className="uploads-card__actions">
                         <button
+                          className="button button--primary"
                           type="button"
                           onClick={() => moveImage(index, -1)}
                           disabled={index === 0}
@@ -475,13 +481,18 @@ function Uploads() {
                           Up
                         </button>
                         <button
+                          className="button button--primary"
                           type="button"
                           onClick={() => moveImage(index, 1)}
                           disabled={index === draft.images.length - 1}
                         >
                           Down
                         </button>
-                        <button type="button" onClick={() => removeImage(index)}>
+                        <button
+                          className="button button--primary"
+                          type="button"
+                          onClick={() => removeImage(index)}
+                        >
                           Remove
                         </button>
                       </div>
@@ -507,7 +518,12 @@ function Uploads() {
               <button className="button button--primary" type="submit" disabled={saving || offline}>
                 {saving ? "Saving…" : "Save project"}
               </button>
-              <button type="button" onClick={closeForm} disabled={saving}>
+              <button
+                className="button button--primary"
+                type="button"
+                onClick={closeForm}
+                disabled={saving}
+              >
                 Cancel
               </button>
             </div>

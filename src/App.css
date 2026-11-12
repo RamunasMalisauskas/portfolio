@@ -187,6 +187,7 @@ a:hover {
   font-size: 12px;
   font-weight: 650;
   text-decoration: none;
+  cursor: pointer;
   transition:
     background-color 160ms ease,
     transform 360ms ease;
@@ -1466,24 +1467,8 @@ a:hover {
 }
 .uploads-card__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-}
-.uploads-card__actions button,
-.uploads__actions button:not(.button) {
-  min-height: 36px;
-  padding: 0 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--ink);
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 650;
-  cursor: pointer;
-}
-.uploads-card__actions button:disabled {
-  opacity: 0.4;
-  cursor: default;
 }
 .uploads-form {
   gap: 16px;
@@ -1536,6 +1521,7 @@ a:hover {
   gap: 12px;
 }
 .uploads-images label {
+  color: var(--accent-ink);
   padding: 12px 18px;
 }
 .uploads-images legend {
@@ -1581,11 +1567,6 @@ a:hover {
 }
 .uploads .button {
   width: fit-content;
-  border-radius: 999px;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 650;
 }
 .uploads .button:disabled {
   opacity: 0.5;
