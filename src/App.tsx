@@ -3,6 +3,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import Uploads from "./components/Uploads";
 import Work from "./components/Work";
 import { waveBackgroundDots } from "./waveDots";
 import "./App.css";
@@ -21,8 +22,13 @@ function getInitialTheme(): Theme {
   }
 }
 
+function currentPage() {
+  return window.location.hash === "#uploads" ? "uploads" : "site";
+}
+
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [page, setPage] = useState(currentPage);
   const nextTheme = theme === "light" ? "dark" : "light";
 
   useEffect(() => {
@@ -33,6 +39,12 @@ function App() {
       // The selected theme still works for this session if storage is unavailable.
     }
   }, [theme]);
+
+  useEffect(() => {
+    const syncPage = () => setPage(currentPage());
+    window.addEventListener("hashchange", syncPage);
+    return () => window.removeEventListener("hashchange", syncPage);
+  }, []);
 
   useEffect(() => {
     const openingTheme = theme;
@@ -57,10 +69,16 @@ function App() {
       />
 
       <main id="main">
-        <Hero />
-        <Work />
-        <About />
-        <Contact />
+        {page === "uploads" ? (
+          <Uploads />
+        ) : (
+          <>
+            <Hero />
+            <Work />
+            <About />
+            <Contact />
+          </>
+        )}
       </main>
     </>
   );

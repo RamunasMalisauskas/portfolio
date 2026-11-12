@@ -14,6 +14,7 @@ function Header({ theme, onToggleTheme }: HeaderProps) {
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        {import.meta.env.DEV && <a href="#uploads">Uploads</a>}
       </nav>
       <button
         className="theme-toggle"
