@@ -13,54 +13,10 @@ type Project = {
   placeholder: boolean;
   visual: string;
   mobile?: boolean;
+  images: string[];
 };
 
 const projects: Project[] = projectData;
-
-const mindleticAppImages = [
-  "mindletic_home.PNG",
-  "mindletic_pleasant.PNG",
-  "mindletic_balance.PNG",
-  "mindletic_breathing.PNG",
-  "mindletic_emotion.PNG",
-  "mindletic_dark.PNG",
-  "mindletic_energy.PNG",
-  "mindletic_health.PNG",
-  "mindletic_paths.PNG",
-  "mindletic_profesionals.PNG",
-  "mindletic_selection.PNG",
-  "mindletic_sound.PNG",
-  "mindletic_streak.PNG",
-  "mindletic_timeline.PNG",
-];
-
-const maliKeliImages = [
-  "malikeli_home.png",
-  "malikeli_work.png",
-  "malikeli_gallery.png",
-  "malikeli_contacts.png",
-];
-const mindleticDashboardImages = [
-  "mindletic_dashboard_home.png",
-  "mindletic_dashboard_3.png",
-  "mindletic_dashboard_home_2.png",
-  "mindletic_dashboard_involvement.png",
-];
-
-const schoolImages = [
-  "ssm_home.png",
-  "ssm_first.png",
-  "ssm_methods.png",
-  "ssm_product.png",
-  "ssm_product2.png",
-  "ssm_team.png",
-];
-const rBoardGameImages = [
-  "rboard_home.png",
-  "rboard_light.png",
-  "rboard_add.png",
-  "rboard_game.png",
-];
 
 function imageSrc(file: string) {
   return `${import.meta.env.BASE_URL}${file}`;
@@ -68,16 +24,6 @@ function imageSrc(file: string) {
 
 function carouselId(title: string) {
   return `carousel-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-}
-
-function imagesFor(title: string) {
-  const name = title.toLowerCase();
-  if (name.includes("dashboard")) return mindleticDashboardImages;
-  if (name.includes("mali")) return maliKeliImages;
-  if (name.includes("mindletic")) return mindleticAppImages;
-  if (name.includes("sveiko") || name.includes("mokykla")) return schoolImages;
-  if (name.includes("board")) return rBoardGameImages;
-  return [];
 }
 
 function ProjectArtwork({
@@ -285,7 +231,7 @@ function Work() {
   } | null>(null);
   const openProject =
     projects.find((project) => project.title === openGallery?.title) ?? null;
-  const openImages = openProject ? imagesFor(openProject.title) : [];
+  const openImages = openProject?.images ?? [];
 
   return (
     <section
@@ -307,7 +253,7 @@ function Work() {
 
       <div className="project-grid">
         {projects.map((project, index) => {
-          const images = imagesFor(project.title);
+          const images = project.images;
           const isOpen = openGallery?.title === project.title;
           const previewImages = project.mobile
             ? images.slice(0, 3)

@@ -8,18 +8,39 @@
     "sourceUrl": "",
     "placeholder": false,
     "visual": "shop",
-    "mobile": true
+    "mobile": true,
+    "images": [
+      "mindletic_home.PNG",
+      "mindletic_pleasant.PNG",
+      "mindletic_balance.PNG",
+      "mindletic_emotion.PNG",
+      "mindletic_dark.PNG",
+      "mindletic_energy.PNG",
+      "mindletic_health.PNG",
+      "mindletic_paths.PNG",
+      "mindletic_profesionals.PNG",
+      "mindletic_selection.PNG",
+      "mindletic_sound.PNG",
+      "mindletic_streak.PNG",
+      "mindletic_timeline.PNG"
+    ]
   },
   {
     "title": "Mali.Keli website",
     "kind": "Portfolio Website",
     "description": "Created a portfolio website for a freelance textile designer using React and Cursor AI with ability to manage content using CRUD operations.",
-    "stack": ["React", "Cursor AI", "CRUD"],
+    "stack": ["Web Design", "React", "Cursor AI", "CRUD"],
     "liveUrl": "https://malikeli.com",
     "sourceUrl": "https://github.com/RamunasMalisauskas/mali.keli",
     "placeholder": false,
     "visual": "shop",
-    "mobile": false
+    "mobile": false,
+    "images": [
+      "malikeli_home.png",
+      "malikeli_work.png",
+      "malikeli_gallery.png",
+      "malikeli_contacts.png"
+    ]
   },
   {
     "title": "Mindletic Dashboard",
@@ -29,7 +50,13 @@
     "liveUrl": "https://partners.mindletic.com/dashboard",
     "sourceUrl": "",
     "placeholder": false,
-    "visual": "signal"
+    "visual": "signal",
+    "images": [
+      "mindletic_dashboard_home.png",
+      "mindletic_dashboard_3.png",
+      "mindletic_dashboard_home_2.png",
+      "mindletic_dashboard_involvement.png"
+    ]
   },
   {
     "title": "sveikostuburomokykla.lt",
@@ -39,7 +66,15 @@
     "liveUrl": "https://sveikostuburomokykla.lt",
     "sourceUrl": "",
     "placeholder": false,
-    "visual": "mobile"
+    "visual": "mobile",
+    "images": [
+      "ssm_home.png",
+      "ssm_first.png",
+      "ssm_methods.png",
+      "ssm_product.png",
+      "ssm_product2.png",
+      "ssm_team.png"
+    ]
   },
   {
     "title": "Board Game Library",
@@ -49,6 +84,12 @@
     "liveUrl": "",
     "sourceUrl": "https://github.com/RamunasMalisauskas/Rgame-database",
     "placeholder": false,
-    "visual": "mobile"
+    "visual": "mobile",
+    "images": [
+      "rboard_home.png",
+      "rboard_light.png",
+      "rboard_add.png",
+      "rboard_game.png"
+    ]
   }
 ]
