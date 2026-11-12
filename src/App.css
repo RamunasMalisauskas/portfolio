@@ -1565,6 +1565,9 @@ a:hover {
   gap: 12px;
   align-items: center;
 }
+.uploads-lock {
+  max-width: 360px;
+}
 .uploads .button {
   width: fit-content;
 }

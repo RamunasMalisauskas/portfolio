@@ -1,9 +1,11 @@
+import { randomBytes, timingSafeEqual } from "node:crypto";
 import fs from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import path from "node:path";
-import type { Plugin } from "vite";
+import { loadEnv, type Plugin } from "vite";
 
 const MAX_BODY = 12 * 1024 * 1024;
+const sessions = new Set<string>();
 const IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif"]);
 const VISUALS = new Set(["shop", "signal", "mobile"]);
 
@@ -45,6 +47,26 @@ function readBody(req: IncomingMessage) {
     req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
     req.on("error", reject);
   });
+}
+
+function uploadsPassword(root: string, mode: string) {
+  return loadEnv(mode, root, "").UPLOADS_PASSWORD ?? "";
+}
+
+function sameSecret(input: string, expected: string) {
+  const given = Buffer.from(input);
+  const stored = Buffer.from(expected);
+  return given.length === stored.length && timingSafeEqual(given, stored);
+}
+
+function sessionToken(req: IncomingMessage) {
+  const token = req.headers["x-uploads-token"];
+  return typeof token === "string" ? token : "";
+}
+
+function hasSession(req: IncomingMessage) {
+  const token = sessionToken(req);
+  return token.length > 0 && sessions.has(token);
 }
 
 function send(res: ServerResponse, status: number, body: unknown) {
@@ -180,8 +202,45 @@ function writeProjects(root: string, projects: StoredProject[]) {
   fs.renameSync(temp, file);
 }
 
-async function handle(req: IncomingMessage, res: ServerResponse, root: string) {
+async function handle(
+  req: IncomingMessage,
+  res: ServerResponse,
+  root: string,
+  mode: string,
+) {
   const pathname = req.url?.split("?")[0];
+
+  if (pathname === "/api/session" && req.method === "GET") {
+    send(res, hasSession(req) ? 200 : 401, { ok: hasSession(req) });
+    return;
+  }
+
+  if (pathname === "/api/session" && req.method === "POST") {
+    const parsed: unknown = JSON.parse(await readBody(req));
+    const password =
+      parsed && typeof parsed === "object" && "password" in parsed
+        ? String((parsed as { password: unknown }).password)
+        : "";
+    const expected = uploadsPassword(root, mode);
+    if (!expected || !sameSecret(password, expected)) {
+      send(res, 401, { error: "Wrong password." });
+      return;
+    }
+    const token = randomBytes(32).toString("hex");
+    sessions.add(token);
+    send(res, 200, { token });
+    return;
+  }
+
+  if (
+    (pathname === "/api/projects" && req.method === "PUT") ||
+    (pathname === "/api/uploads" && req.method === "POST")
+  ) {
+    if (!hasSession(req)) {
+      send(res, 401, { error: "Unlock the page first." });
+      return;
+    }
+  }
 
   if (pathname === "/api/projects" && req.method === "GET") {
     res.statusCode = 200;
@@ -226,12 +285,16 @@ export function projectsApi(): Plugin {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const pathname = req.url?.split("?")[0];
-        if (pathname !== "/api/projects" && pathname !== "/api/uploads") {
+        if (
+          pathname !== "/api/projects" &&
+          pathname !== "/api/uploads" &&
+          pathname !== "/api/session"
+        ) {
           next();
           return;
         }
 
-        void handle(req, res, server.config.root).catch((error: unknown) => {
+        void handle(req, res, server.config.root, server.config.mode).catch((error: unknown) => {
           const message = error instanceof Error ? error.message : "Request failed";
           if (!res.headersSent) send(res, 400, { error: message });
         });

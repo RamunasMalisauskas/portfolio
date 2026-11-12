@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import projectData from "../data/projects.json";
 
 type Project = {
@@ -33,6 +33,22 @@ type Draft = {
   mobile: boolean;
   images: DraftImage[];
 };
+
+function sessionToken() {
+  try {
+    return sessionStorage.getItem("uploads-token") ?? "";
+  } catch {
+    return "";
+  }
+}
+
+function authHeaders(json = false) {
+  const headers: Record<string, string> = {};
+  const token = sessionToken();
+  if (token) headers["x-uploads-token"] = token;
+  if (json) headers["Content-Type"] = "application/json";
+  return headers;
+}
 
 const visuals = [
   { value: "shop", label: "Shop" },
@@ -125,7 +141,7 @@ function fileToBase64(file: File) {
 async function uploadImage(file: File) {
   const response = await fetch("/api/uploads", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders(true),
     body: JSON.stringify({ name: file.name, data: await fileToBase64(file) }),
   });
   if (!response.ok) throw new Error(await readError(response));
@@ -134,6 +150,9 @@ async function uploadImage(file: File) {
 }
 
 function Uploads() {
+  const [unlocked, setUnlocked] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [projects, setProjects] = useState<Project[]>(projectData);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
@@ -143,6 +162,23 @@ function Uploads() {
   const [offline, setOffline] = useState(false);
 
   useEffect(() => {
+    const token = sessionToken();
+    if (!token) return;
+    let active = true;
+    fetch("/api/session", { headers: authHeaders() })
+      .then((response) => {
+        if (active && response.ok) setUnlocked(true);
+      })
+      .catch(() => {
+        // A missing dev server leaves the lock in place.
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!unlocked) return;
     let active = true;
     fetch("/api/projects")
       .then(async (response) => {
@@ -158,7 +194,63 @@ function Uploads() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [unlocked]);
+
+  async function unlock(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPasswordError("");
+    try {
+      const response = await fetch("/api/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      if (!response.ok) {
+        setPasswordError("Wrong password.");
+        return;
+      }
+      const body = (await response.json()) as { token?: string };
+      if (!body.token) throw new Error("Could not unlock");
+      sessionStorage.setItem("uploads-token", body.token);
+      setPassword("");
+      setUnlocked(true);
+    } catch {
+      setPasswordError("Saving is available while the dev server is running.");
+    }
+  }
+
+  if (!unlocked) {
+    return (
+      <section className="uploads section wrap" aria-labelledby="uploads-title">
+        <div className="section-heading">
+          <h2 id="uploads-title">
+            Uploads<span className="highlight-word__dot">.</span>
+          </h2>
+          <p className="section-heading__aside">This page is locked.</p>
+        </div>
+        <form className="uploads-form uploads-lock" onSubmit={unlock}>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
+              autoFocus
+            />
+          </label>
+          {passwordError && (
+            <p className="uploads-error" role="alert">
+              {passwordError}
+            </p>
+          )}
+          <button className="button button--primary" type="submit">
+            Unlock
+          </button>
+        </form>
+      </section>
+    );
+  }
 
   function openNew() {
     setEditingIndex(-1);
@@ -251,7 +343,7 @@ function Uploads() {
           : projects.map((item, index) => (index === editingIndex ? project : item));
       const response = await fetch("/api/projects", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: authHeaders(true),
         body: JSON.stringify(next),
       });
       if (!response.ok) throw new Error(await readError(response));
@@ -275,7 +367,7 @@ function Uploads() {
       const next = projects.filter((_, itemIndex) => itemIndex !== index);
       const response = await fetch("/api/projects", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: authHeaders(true),
         body: JSON.stringify(next),
       });
       if (!response.ok) throw new Error(await readError(response));
