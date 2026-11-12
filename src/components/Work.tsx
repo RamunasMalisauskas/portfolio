@@ -73,6 +73,7 @@ function carouselId(title: string) {
 function imagesFor(title: string) {
   const name = title.toLowerCase();
   if (name.includes("dashboard")) return mindleticDashboardImages;
+  if (name.includes("mali")) return maliKeliImages;
   if (name.includes("mindletic")) return mindleticAppImages;
   if (name.includes("sveiko") || name.includes("mokykla")) return schoolImages;
   if (name.includes("board")) return rBoardGameImages;
