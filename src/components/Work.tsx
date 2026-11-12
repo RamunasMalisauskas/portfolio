@@ -34,6 +34,12 @@ const mindleticAppImages = [
   "mindletic_timeline.PNG",
 ];
 
+const maliKeliImages = [
+  "malikeli_home.png",
+  "malikeli_work.png",
+  "malikeli_gallery.png",
+  "malikeli_contacts.png",
+];
 const mindleticDashboardImages = [
   "mindletic_dashboard_home.png",
   "mindletic_dashboard_3.png",
