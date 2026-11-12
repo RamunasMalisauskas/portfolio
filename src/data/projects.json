@@ -89,10 +89,12 @@
     "visual": "mobile",
     "mobile": false,
     "images": [
-      "rboard_home.png",
-      "rboard_light.png",
-      "rboard_add.png",
-      "rboard_game.png"
+      "board_home.png",
+      "board_dark.png",
+      "board_cards.png",
+      "board_tags.png",
+      "board_add.png",
+      "board_edit.png"
     ]
   }
 ]
