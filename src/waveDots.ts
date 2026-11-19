@@ -37,12 +37,16 @@ function finishWave() {
   document.documentElement.classList.remove("dots-waving");
 }
 
-export function waveBackgroundDots(from: Theme, to: Theme) {
+export function waveBackgroundDots(
+  from: Theme,
+  to: Theme,
+  origin?: Element | null,
+) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   finishWave();
 
-  const button = document.querySelector(".theme-toggle");
+  const button = origin ?? document.querySelector(".theme-toggle");
   const rect = button?.getBoundingClientRect();
   const originX = rect
     ? rect.left + window.scrollX + rect.width / 2

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
@@ -30,6 +30,8 @@ function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [page, setPage] = useState(currentPage);
   const nextTheme = theme === "light" ? "dark" : "light";
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -47,11 +49,24 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const openingTheme = theme;
-    const timeout = window.setTimeout(() => {
-      waveBackgroundDots(openingTheme, openingTheme);
-    }, 1800);
-    return () => window.clearTimeout(timeout);
+    let awayFromTop = window.scrollY > 48;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const current = themeRef.current;
+      if (!awayFromTop && y > 48) {
+        awayFromTop = true;
+        waveBackgroundDots(current, current);
+        return;
+      }
+      if (awayFromTop && y <= 8) {
+        awayFromTop = false;
+        waveBackgroundDots(current, current);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

@@ -50,7 +50,21 @@ function Contact() {
           <span className="status-dot" /> Made with care in Lithuania
         </p>
 
-        <a className="back-top" href="#top">
+        <a
+          className="back-top"
+          href="#top"
+          onClick={(event) => {
+            if (window.location.hash !== "#top") return;
+            event.preventDefault();
+            const reduce = window.matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches;
+            window.scrollTo({
+              top: 0,
+              behavior: reduce ? "auto" : "smooth",
+            });
+          }}
+        >
           BACK TO TOP ↑
         </a>
       </footer>
